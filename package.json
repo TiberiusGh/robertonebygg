@@ -1,0 +1,23 @@
+{
+  "name": "robertonebygg",
+  "version": "1.0.0",
+  "description": "Webbsida för snickeri företaget Robertonebygg",
+  "main": "/js/main.js",
+  "scripts": {
+    "build": "tailwindcss -i ./css/input.css -o ./css/styles.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TiberiusGh/robertonebygg.git"
+  },
+  "author": "Tiberius Gherac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TiberiusGh/robertonebygg/issues"
+  },
+  "homepage": "https://github.com/TiberiusGh/robertonebygg#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  }
+}
