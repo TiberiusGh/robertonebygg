@@ -2,8 +2,33 @@
 
 const hamburgerMenu = document.querySelector('nav button')
 const mobileMenu = document.querySelector('#mobile-menu')
-const spans = hamburgerMenu.querySelectorAll('span')
+const nav = document.querySelector('nav')
+const logo = document.querySelector('nav h1')
+const hamburgerSpans = hamburgerMenu.querySelectorAll('span')
+const body = document.body
 
 hamburgerMenu.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden')
+  const isOpen = nav.classList.contains('bg-black')
+
+  if (isOpen) {
+    // Close menu
+    mobileMenu.style.maxHeight = '0'
+    nav.classList.remove('bg-black')
+    logo.classList.remove('text-white')
+    hamburgerSpans.forEach((span) => {
+      span.classList.remove('bg-white')
+      span.classList.add('bg-gray-800')
+    })
+  } else {
+    // Open menu
+    nav.classList.add('bg-black')
+    logo.classList.add('text-white')
+    hamburgerSpans.forEach((span) => {
+      span.classList.add('bg-white')
+      span.classList.remove('bg-gray-800')
+    })
+    mobileMenu.style.maxHeight = '800px'
+  }
+
+  body.classList.toggle('overflow-hidden')
 })

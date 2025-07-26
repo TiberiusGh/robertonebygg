@@ -27,13 +27,13 @@
     <script type="module" src="/js/main.js"></script>
   </head>
 
-  <body>
+  <body class="touch-manipulation">
     <nav
-      class="flex flex-col md:flex-row w-full px-4 py-2 md:justify-between md:items-center"
+      class="sticky top-0 flex flex-col md:flex-row w-full px-4 py-2 md:justify-between md:items-center transition-all duration-300 z-50"
     >
-      <div class="flex justify-between items-center p-4">
+      <div class="flex justify-between items-center">
         <h1
-          class="text-2xl font-bold tracking-tight text-gray-900 select-none cursor-default"
+          class="text-xl font-bold tracking-tight text-gray-900 select-none cursor-default transition-colors duration-300"
         >
           Robertonebygg
         </h1>
@@ -41,30 +41,73 @@
         <button
           class="flex flex-col items-center space-y-1 md:hidden hover:opacity-80 cursor-pointer"
         >
-          <span class="w-6 h-0.5 bg-gray-800"></span>
-          <span class="w-6 h-0.5 bg-gray-800"></span>
-          <span class="w-6 h-0.5 bg-gray-800"></span>
+          <span
+            class="w-6 h-0.5 bg-gray-800 transition-colors duration-300"
+          ></span>
+          <span
+            class="w-6 h-0.5 bg-gray-800 transition-colors duration-300"
+          ></span>
+          <span
+            class="w-6 h-0.5 bg-gray-800 transition-colors duration-300"
+          ></span>
         </button>
       </div>
 
       <ul class="hidden md:flex space-x-6">
-        <li><a href="/index.html">Hem</a></li>
-        <li><a href="/pages/about.html">Om</a></li>
-        <li><a href="/pages/whatwedo.html">Tjänster Vi Utför</a></li>
-        <li><a href="/pages/contact.html">Kontakt</a></li>
+        <li><a href="/index.html">HEM</a></li>
+        <li><a href="/pages/about.html">OM OSS</a></li>
+        <li><a href="/pages/whatwedo.html">TJÄNSTER VI UTFÖR</a></li>
+        <li><a href="/pages/contact.html">KONTAKT</a></li>
       </ul>
 
-      <div id="mobile-menu" class="hidden md:hidden">
-        <ul class="flex flex-col space-y-2 space-x-3">
-          <li class="py-2 px-8 bg-gray-100"><a href="/index.html">HEM</a></li>
-          <li class="py-2 px-8 bg-gray-100">
-            <a href="/pages/about.html">OM OSS</a>
+      <!-- Menu items that slide down -->
+      <div
+        id="mobile-menu"
+        class="overflow-hidden transition-all duration-700 md:hidden"
+        style="max-height: 0"
+      >
+        <ul
+          class="flex flex-col space-y-6 text-white text-xl text-center py-22"
+        >
+          <li><a href="/index.html" class="">Hem</a></li>
+          <li>
+            <a href="/pages/about.html" class="hover:text-gray-300">Om oss</a>
           </li>
-          <li class="py-2 px-8 bg-gray-100">
-            <a href="/pages/whatwedo.html">TJÄNSTER VI UTFÖR</a>
+          <li>
+            <a href="/pages/whatwedo.html" class="hover:text-gray-300"
+              >Tjänster vi utför</a
+            >
           </li>
-          <li class="py-2 px-8 bg-gray-100">
-            <a href="/pages/contact.html">KONTAKT</a>
+
+          <li>
+            <a href="/pages/contact.html" class="hover:text-gray-300"
+              >Kontakt</a
+            >
+          </li>
+        </ul>
+        <ul class="text-white text-xl text-left p-6">
+          <li class="flex justify-center">
+            <a href="tel:+46704240383" class="flex items-center gap-2">
+              <img
+                src="images/icons/phone.png"
+                class="w-4 h-4 filter invert brightness-200"
+                alt="Phone icon"
+              />
+              070 424 03 83
+            </a>
+          </li>
+          <li class="flex justify-center">
+            <a
+              href="mailto:robertonebygg@gmail.com"
+              class="flex items-center gap-2"
+            >
+              <img
+                src="images/icons/email.png"
+                class="w-4 h-4 filter invert brightness-200"
+                alt="Mail icon"
+              />
+              robertonebygg@gmail.com
+            </a>
           </li>
         </ul>
       </div>
