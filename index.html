@@ -23,53 +23,55 @@
       sizes="96x96"
     />
 
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/output.css" />
     <script type="module" src="/js/main.js"></script>
   </head>
 
   <body class="touch-manipulation">
     <nav
-      class="sticky top-0 flex flex-col md:flex-row w-full px-4 py-2 md:justify-between md:items-center transition-all duration-300 z-50"
+      class="absolute top-0 flex flex-col md:flex-row w-full px-4 py-2 md:justify-between md:items-center transition-all duration-500 z-50 pt-5 bg-gradient-to-b from-black/80 to-transparent/20"
     >
       <div class="flex justify-between items-center">
         <h1
-          class="text-xl font-bold tracking-tight text-gray-900 select-none cursor-default transition-colors duration-300"
+          class="text-xl md:text-4xl font-bold tracking-tight text-brand-light select-none cursor-default"
         >
           Robertonebygg
         </h1>
 
         <button
-          class="flex flex-col items-center space-y-1 md:hidden hover:opacity-80 cursor-pointer"
+          class="flex flex-col items-center space-y-1 md:hidden cursor-pointer"
         >
-          <span
-            class="w-6 h-0.5 bg-gray-800 transition-colors duration-300"
-          ></span>
-          <span
-            class="w-6 h-0.5 bg-gray-800 transition-colors duration-300"
-          ></span>
-          <span
-            class="w-6 h-0.5 bg-gray-800 transition-colors duration-300"
-          ></span>
+          <span class="w-6 h-0.5 bg-brand-light"></span>
+          <span class="w-6 h-0.5 bg-brand-light"></span>
+          <span class="w-6 h-0.5 bg-brand-light"></span>
         </button>
       </div>
 
-      <ul class="hidden md:flex space-x-6">
-        <li><a href="/index.html">HEM</a></li>
-        <li><a href="/pages/about.html">OM OSS</a></li>
-        <li><a href="/pages/whatwedo.html">TJÄNSTER VI UTFÖR</a></li>
-        <li><a href="/pages/contact.html">KONTAKT</a></li>
+      <ul class="hidden md:flex space-x-6 text-brand-light">
+        <li><a href="/index.html" class="hover:text-gray-300">Hem</a></li>
+        <li>
+          <a href="/pages/about.html" class="hover:text-gray-300">Om oss</a>
+        </li>
+        <li>
+          <a href="/pages/whatwedo.html" class="hover:text-gray-300"
+            >Tjänster vi utför</a
+          >
+        </li>
+        <li>
+          <a href="/pages/contact.html" class="hover:text-gray-300">Kontakt</a>
+        </li>
       </ul>
 
       <!-- Menu items that slide down -->
       <div
         id="mobile-menu"
-        class="overflow-hidden transition-all duration-700 md:hidden"
+        class="overflow-hidden transition-all duration-400 md:hidden"
         style="max-height: 0"
       >
         <ul
-          class="flex flex-col space-y-6 text-white text-xl text-center py-22"
+          class="flex flex-col space-y-6 text-brand-light text-xl text-center py-22"
         >
-          <li><a href="/index.html" class="">Hem</a></li>
+          <li><a href="/index.html" class="hover:text-gray-300">Hem</a></li>
           <li>
             <a href="/pages/about.html" class="hover:text-gray-300">Om oss</a>
           </li>
@@ -85,12 +87,12 @@
             >
           </li>
         </ul>
-        <ul class="text-white text-xl text-left p-6">
+        <ul class="text-brand-light text-xl text-left p-6">
           <li class="flex justify-center">
             <a href="tel:+46704240383" class="flex items-center gap-2">
               <img
                 src="images/icons/phone.png"
-                class="w-4 h-4 filter invert brightness-200"
+                class="w-4 h-4 filter invert"
                 alt="Phone icon"
               />
               070 424 03 83
@@ -103,7 +105,7 @@
             >
               <img
                 src="images/icons/email.png"
-                class="w-4 h-4 filter invert brightness-200"
+                class="w-4 h-4 filter invert"
                 alt="Mail icon"
               />
               robertonebygg@gmail.com
@@ -112,5 +114,120 @@
         </ul>
       </div>
     </nav>
+
+    <div
+      class="relative w-full h-[70vh] md:h-[80vh] select-none cursor-default"
+    >
+      <img
+        src="/images/hero/carpentry-6585279_1920.jpg"
+        alt="Hero Image"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="bg-brand-medium/90 px-8 py-4 rounded-lg text-center">
+          <div
+            class="flex flex-col md:flex-row md:gap-5 justify-center items-center"
+          >
+            <h2 class="text-white text-xl md:text-3xl">Din lokala snickare</h2>
+            <a
+              href="/pages/contact.html"
+              class="bg-brand-dark md:text-3xl rounded-full px-4 py-2 mt-2 md:mt-0 hover:bg-brand-accent text-brand-light transition-colors z-10"
+              >Kontakt</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="max-w-[1000px] flex flex-col items-center justify-center mx-auto py-8 text-center"
+    >
+      <!-- Intro -->
+      <div class="max-w-3xl mx-auto px-4 py-8 space-y-6 text-gray-800">
+        <h1 class="text-2xl md:text-4xl font-bold text-brand-dark p-4">
+          Renovering, snickeri och byggtjänster i Kalmar. Etablerat firma sedan
+          2015
+        </h1>
+        <p class="text-lg leading-relaxed">
+          Vi är ett seriöst byggföretag med ett ständigt fokus på kundens
+          önskemål och förutsättningar.
+        </p>
+
+        <p class="text-lg leading-relaxed">
+          Vi utför alla sorters byggtjänster såsom nybyggnation, tillbyggnad,
+          renovering av kök, badrum, tak och mycket mer. Vi åtar oss arbeten
+          främst från privatpersoner men utför även arbeten åt företag. Vårt
+          verksamhetsområde runt om i Kalmar län. Vi anser oss vara klara först
+          när kunden är 100% nöjd.
+        </p>
+      </div>
+    </section>
+
+    <section class="bg-brand-light w-full">
+      <div
+        class="max-w-[1000px] flex flex-col items-center justify-center mx-auto py-8 text-center"
+      >
+        <h1 class="text-2xl md:text-4xl font-bold text-brand-dark p-4 pb-48">
+          Det vi kan hjälpa med
+        </h1>
+
+        <!-- Altan section -->
+        <div class="relative min-h-72 md:min-h-150 h-auto w-full mx-auto">
+          <img
+            src="/images/altan/altanh2.webp"
+            alt="Altan Image 2"
+            class="w-48 h-48 md:h-100 md:w-100 shadow-xl rounded-lg absolute top-15 left-4 md:top-30 md:left-40 z-10 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+
+          <img
+            src="/images/altan/altanh1.webp"
+            alt="Altan Image 1"
+            class="w-48 h-48 md:h-100 md:w-100 shadow-xl rounded-lg absolute top-0 right-4 md:top-0 md:right-40 hover:z-20 hover:scale-105 transition-all duration-300 hover:shadow-2xl"
+          />
+        </div>
+
+        <div
+          class="max-w-3xl mx-auto px-4 py-8 space-y-6 text-brand-light w-full"
+        >
+          <a
+            href="/pages/altan.html"
+            class="font-bold text-2xl p-4 bg-brand-medium hover:bg-brand-dark transition-colors"
+            >Altanbyggnation</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div
+        class="max-w-[1000px] flex flex-col items-center justify-center mx-auto py-8 text-center"
+      >
+        <!-- Badrum section -->
+        <div class="relative min-h-72 md:min-h-150 h-auto w-full mx-auto">
+          <img
+            src="/images/badrum/badrumh2.webp"
+            alt="Badrum Image 2"
+            class="w-48 h-48 md:h-100 md:w-100 shadow-xl rounded-lg absolute top-15 left-4 md:top-30 md:left-40 z-10 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+          />
+
+          <img
+            src="/images/badrum/badrumh1.webp"
+            alt="Badrum Image 1"
+            class="w-48 h-48 md:h-100 md:w-100 shadow-xl rounded-lg absolute top-0 right-4 md:top-0 md:right-40 hover:z-20 hover:scale-105 transition-all duration-300 hover:shadow-2xl"
+          />
+        </div>
+
+        <div
+          class="max-w-3xl mx-auto px-4 py-8 space-y-6 text-brand-light w-full"
+        >
+          <a
+            href="/pages/badrum.html"
+            class="font-bold text-2xl p-4 bg-brand-medium hover:bg-brand-dark transition-colors"
+            >Badrumsrenovering</a
+          >
+        </div>
+      </div>
+    </section>
   </body>
 </html>
