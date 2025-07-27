@@ -1,5 +1,4 @@
 // Nav
-
 const hamburgerMenu = document.querySelector('nav button')
 const mobileMenu = document.querySelector('#mobile-menu')
 const nav = document.querySelector('nav')
@@ -14,21 +13,22 @@ hamburgerMenu.addEventListener('click', () => {
     // Close menu
     mobileMenu.style.maxHeight = '0'
     nav.classList.remove('bg-black')
-    logo.classList.remove('text-white')
-    hamburgerSpans.forEach((span) => {
-      span.classList.remove('bg-white')
-      span.classList.add('bg-gray-800')
-    })
   } else {
     // Open menu
     nav.classList.add('bg-black')
     logo.classList.add('text-white')
-    hamburgerSpans.forEach((span) => {
-      span.classList.add('bg-white')
-      span.classList.remove('bg-gray-800')
-    })
     mobileMenu.style.maxHeight = '800px'
   }
 
   body.classList.toggle('overflow-hidden')
+})
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 1) {
+    nav.classList.remove('absolute')
+    nav.classList.add('fixed')
+  } else {
+    nav.classList.add('absolute')
+    nav.classList.remove('fixed')
+  }
 })
