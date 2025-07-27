@@ -4,7 +4,7 @@
   "description": "Webbsida för snickeri företaget Robertonebygg",
   "main": "/js/main.js",
   "scripts": {
-    "build": "tailwindcss -i ./css/input.css -o ./css/styles.css --watch"
+    "build": "tailwindcss -i ./css/input.css -o ./css/output.css --watch"
   },
   "repository": {
     "type": "git",
