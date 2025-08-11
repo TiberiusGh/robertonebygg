@@ -4,6 +4,7 @@ const mobileMenu = document.querySelector('#mobile-menu')
 const nav = document.querySelector('nav')
 const logo = document.querySelector('nav h1')
 const body = document.body
+const mobileMenuA = document.querySelectorAll('#mobile-menu a')
 
 const treshold = 70
 let isMenuOpen = false
@@ -49,4 +50,10 @@ body.addEventListener('click', (event) => {
   if (isMenuOpen && !event.target.closest('nav')) {
     hamburgerMenu.click()
   }
+})
+
+mobileMenuA.forEach((element) => {
+  element.addEventListener('click', () => {
+    hamburgerMenu.click()
+  })
 })
