@@ -5,6 +5,8 @@ const nav = document.querySelector('nav')
 const logo = document.querySelector('nav h1')
 const body = document.body
 const mobileMenuA = document.querySelectorAll('#mobile-menu a')
+const filBtn = document.getElementById('fil')
+const fileList = document.getElementById('file-list')
 
 function hello() {
   console.log('%cHej!', 'font-size: 16px; font-weight: bold; color: #1f2530;')
@@ -69,4 +71,27 @@ mobileMenuA.forEach((element) => {
   element.addEventListener('click', () => {
     hamburgerMenu.click()
   })
+})
+
+// Handle multiple files
+filBtn.addEventListener('change', function (e) {
+  const files = e.target.files
+
+  if (files.length > 0) {
+    // Clear previous content
+    fileList.replaceChildren()
+    fileList.classList.remove('hidden')
+
+    // Create file list
+    Array.from(files).forEach((file) => {
+      const fileItem = document.createElement('div')
+      fileItem.textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(
+        1
+      )} KB)`
+      fileItem.className = 'py-1'
+      fileList.appendChild(fileItem)
+    })
+  } else {
+    fileList.classList.add('hidden')
+  }
 })

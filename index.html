@@ -188,9 +188,9 @@
         <div
           class="relative -top-7/12 px-[10vw] text-white z-10 cursor-default select-none"
         >
-          <h1 class="text-4xl sm:text-5xl font-bold pb-10">
+          <h2 class="text-4xl sm:text-5xl font-bold pb-10">
             Din Lokala Snickare
-          </h1>
+          </h2>
           <p class="text-lg pb-6">
             Renovering, snickeri och byggtjänster i Kalmar. Etablerat firma
             sedan 2015 och med över 30 är erfarenget är vi ett seriöst
@@ -379,11 +379,11 @@
         ></textarea>
 
         <div class="flex flex-col sm:flex-row gap-6 mt-6 lg:w-1/2 w-full">
-          <input type="file" name="file" id="fil" class="hidden" />
+          <input type="file" name="file" id="fil" class="hidden" multiple />
           <label
             for="fil"
             class="flex-2 px-8 py-4 rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl text-center tracking-wider cursor-pointer"
-            >Ladda upp dokument</label
+            >Ladda upp fil(er)</label
           >
 
           <input
@@ -392,8 +392,7 @@
             class="flex-1 px-8 py-4 rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl text-center tracking-wider cursor-pointer"
           />
         </div>
-
-        <div class="py-6" data-netlify-recaptcha="true"></div>
+        <div id="file-list" class="mt-2 text-sm text-gray-600 hidden"></div>
       </form>
     </section>
 
@@ -422,7 +421,6 @@
               fill="currentColor"
             >
               <path
-                id="Path"
                 stroke="none"
                 d="M 29.199997 -0.150024 L 490.149963 -0.150024 C 505.774963 -0.150024 519.849976 13.924988 519.849976 29.549988 L 519.849976 490.5 C 519.849976 506.125 505.774963 520.200012 490.149963 520.200012 L 29.199997 520.200012 C 13.574997 520.200012 -0.5 506.125 -0.5 490.5 L -0.5 29.549988 C -0.5 13.924988 13.574997 -0.150024 29.199997 -0.150024 Z M 369.024994 292.024994 L 440.900024 292.024994 L 444.025024 223.274994 L 369.024994 223.274994 L 369.024994 172.5 C 369.024994 152.975006 372.925018 142.025024 397.924988 142.025024 L 441.674988 142.025024 L 443.25 77.950012 C 443.25 77.950012 423.724976 74.825012 395.599976 74.825012 C 326.850006 74.825012 296.375 117.799988 296.375 163.899994 L 296.375 223.274994 L 245.600006 223.274994 L 245.600006 292.024994 L 296.375 292.024994 L 296.375 482.650024 L 369.024994 482.650024 L 369.024994 292.024994 Z"
               />
@@ -443,7 +441,6 @@
               viewBox="0 0 600 566"
             >
               <path
-                id="Path"
                 fill="currentColor"
                 stroke="none"
                 d="M 418.873352 363.206696 L 403.690002 378.300018 C 403.690002 378.300018 367.603333 414.18335 269.103333 316.23999 C 170.604004 218.300293 206.689972 182.419006 206.689972 182.419006 L 216.25 172.912659 C 239.803345 149.49469 242.023346 111.896973 221.473328 84.449341 L 179.441986 28.302673 C 154.009338 -5.669312 104.865341 -10.156982 75.714996 18.827698 L 23.395004 70.850647 C 8.94101 85.222656 -0.744995 103.852966 0.429672 124.520325 C 3.434662 177.393982 27.356995 291.156677 160.845337 423.886658 C 302.403351 564.640015 435.226685 570.233337 489.543335 565.169983 C 506.723328 563.570068 521.66333 554.820007 533.703369 542.84668 L 581.056641 495.766663 C 613.02002 463.983307 604.006714 409.496674 563.110046 387.266663 L 499.426636 352.646667 C 472.573364 338.049988 439.860046 342.33667 418.873352 363.206696 Z"
