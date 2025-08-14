@@ -19,6 +19,7 @@ function hello() {
 }
 hello()
 
+
 const treshold = 70
 let isMenuOpen = false
 
