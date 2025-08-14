@@ -6,6 +6,14 @@ const logo = document.querySelector('nav h1')
 const body = document.body
 const mobileMenuA = document.querySelectorAll('#mobile-menu a')
 
+function hello() {
+  console.log('%Hej!', 'font-size: 16px; font-weight: bold; color: #4A7FB0;')
+  console.log(
+    '%cDoes this page need fixes or improvements? Please let me know .',
+    'font-size: 12px;'
+  )
+}
+
 const treshold = 70
 let isMenuOpen = false
 

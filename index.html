@@ -6,6 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
     />
+    <meta
+      name="description"
+      content="Professionell snickare. Vi hjälper med altanbyggnation, badrumsrenovering, takbyte, stugbyggnation och mer. Kontakta oss för offert och rådgivning."
+    />
+
     <title>Robertonebygg</title>
     <link
       rel="icon"
@@ -49,15 +54,27 @@
             ROBERTONEBYGG
           </h1>
           <ul class="hidden xl:flex space-x-6 items-center flex-nowrap">
-            <li><a href="#" class="hover:text-stone-300">Hem</a></li>
-            <li><a href="#" class="hover:text-stone-300">Om oss</a></li>
             <li>
-              <a href="#" class="hover:text-stone-300">Tidigare projekt</a>
+              <a href="#" class="hover:text-stone-300" aria-label="Hem">Hem</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-stone-300" aria-label="Om oss"
+                >Om oss</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-stone-300"
+                aria-label="Tidigare projekt"
+                >Tidigare projekt</a
+              >
             </li>
             <li>
               <a
                 href="#kontakt"
                 class="block border-2 border-white rounded-md px-4 py-1 font-bold mx-auto hover:border-stone-300 hover:text-stone-300 tracking-wider"
+                aria-label="Kontakta oss"
               >
                 Kontakt
               </a>
@@ -67,6 +84,8 @@
           <button
             id="mobile-menu-button"
             class="w-9 cursor-pointer text-white hover:text-stone-300 xl:hidden"
+            aria-label="Öppna navigeringsmeny"
+            aria-expanded="false"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -83,18 +102,32 @@
         <!-- Menu items that slide down -->
         <div
           id="mobile-menu"
-          class="absolute top-full left-0 w-full bg-brand-accent overflow-hidden max-h-0 transition-all duration-300 xl:hidden z-20"
+          class="absolute top-full left-0 w-full bg-brand-accent overflow-hidden max-h-0 transition-all duration-300 xl:hidden z-20 shadow-lg shadow-stone-50/10"
         >
           <ul class="flex flex-col pt-8 space-y-8 w-full text-center text-xl">
-            <li><a class="mt-4 hover:text-stone-300" href="#">Hem</a></li>
-            <li><a href="#" class="hover:text-stone-300">Om oss</a></li>
             <li>
-              <a href="#" class="hover:text-stone-300">Tidigare projekt</a>
+              <a class="mt-4 hover:text-stone-300" href="#" aria-label="Hem"
+                >Hem</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-stone-300" aria-label="Om oss"
+                >Om oss</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="hover:text-stone-300"
+                aria-label="Tidigare projekt"
+                >Tidigare projekt</a
+              >
             </li>
             <li>
               <a
                 href="#kontakt"
                 class="inline-block border-3 border-white rounded-md px-12 py-2 font-bold mx-auto hover:border-stone-300 hover:text-stone-300 tracking-wider"
+                aria-label="Kontakta oss"
               >
                 Kontakta oss
               </a>
@@ -147,7 +180,7 @@
         <!-- Hero -->
         <picture>
           <img
-            src="images/hero/testhero.jpg"
+            src="images/hero/index_hero.webp"
             alt="Hero image"
             class="w-full h-full object-cover bg-center opacity-90"
           />
@@ -359,7 +392,7 @@
           />
         </div>
 
-        <div class="field">
+        <div class="field py-4">
           <div data-netlify-recaptcha="true"></div>
         </div>
       </form>
@@ -371,13 +404,14 @@
       >
         <div class="flex flex-row sm:flex-col justify-between align-middle">
           <h1
-            class="sm:text-3xl text-2xl font-bold tracking-tight cursor-default select-none z-30 text-shadow-lg/20"
+            class="sm:text-3xl text-2xl font-bold tracking-tight cursor-default select-none text-shadow-lg/20"
           >
             ROBERTONEBYGG
           </h1>
           <a
             href="https://www.facebook.com/robertmarius.gherac"
             class="hover:text-gray-300 w-fit"
+            aria-label="Facebook länk"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -438,7 +472,9 @@
           >
         </div>
       </div>
-      <span class="border-b-1 w-4/6 pt-8 flex mx-auto border-stone-500"></span>
+      <span
+        class="border-b-1 w-4/6 pt-8 flex mx-auto border-brand-light"
+      ></span>
       <p class="pt-8 px-[10vw]">
         Skapad av
         <a
