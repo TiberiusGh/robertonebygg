@@ -7,12 +7,18 @@ const body = document.body
 const mobileMenuA = document.querySelectorAll('#mobile-menu a')
 
 function hello() {
-  console.log('%Hej!', 'font-size: 16px; font-weight: bold; color: #4A7FB0;')
+  console.log('%cHej!', 'font-size: 16px; font-weight: bold; color: #1f2530;')
   console.log(
-    '%cDoes this page need fixes or improvements? Please let me know .',
-    'font-size: 12px;'
+    '%cBehöver den här sidan åtgärdas eller förbättras? Vänligen meddela mig https://github.com/TiberiusGh/robertonebygg.',
+    'font-size: 12px; font-weight: bold; color: #1f2530'
+  )
+  console.log(
+    '%c/Tiberius https://linkedin.com/in/tiberius-gh/',
+    'font-size: 12px; font-weight: bold; color: #1f2530;'
   )
 }
+hello()
+
 
 const treshold = 70
 let isMenuOpen = false
