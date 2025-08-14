@@ -346,13 +346,16 @@
       </h2>
 
       <form
-        action="POST"
+        action="#"
         name="Kontakt"
         enctype="multipart/form-data"
         method="POST"
-        netlify
+        data-netlify="true"
+        data-netlify-recaptcha="true"
         class="text-2xl"
       >
+        <input type="hidden" name="form-name" value="Kontakt" />
+
         <input
           type="text"
           name="name"
@@ -390,10 +393,6 @@
             value="Skicka"
             class="flex-1 px-8 py-4 rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl text-center tracking-wider cursor-pointer"
           />
-        </div>
-
-        <div class="field py-4">
-          <div data-netlify-recaptcha="true"></div>
         </div>
       </form>
     </section>
