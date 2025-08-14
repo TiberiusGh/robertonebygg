@@ -1,34 +1,67 @@
 // Nav
-const hamburgerMenu = document.querySelector('nav button')
+const hamburgerMenu = document.querySelector('#mobile-menu-button')
 const mobileMenu = document.querySelector('#mobile-menu')
 const nav = document.querySelector('nav')
 const logo = document.querySelector('nav h1')
-const hamburgerSpans = hamburgerMenu.querySelectorAll('span')
 const body = document.body
+const mobileMenuA = document.querySelectorAll('#mobile-menu a')
 
-hamburgerMenu.addEventListener('click', () => {
-  const isOpen = nav.classList.contains('bg-black')
+function hello() {
+  console.log('%Hej!', 'font-size: 16px; font-weight: bold; color: #4A7FB0;')
+  console.log(
+    '%cDoes this page need fixes or improvements? Please let me know .',
+    'font-size: 12px;'
+  )
+}
 
-  if (isOpen) {
-    // Close menu
-    mobileMenu.style.maxHeight = '0'
-    nav.classList.remove('bg-black')
-  } else {
-    // Open menu
-    nav.classList.add('bg-black')
-    logo.classList.add('text-white')
-    mobileMenu.style.maxHeight = '800px'
-  }
-
-  body.classList.toggle('overflow-hidden')
-})
+const treshold = 70
+let isMenuOpen = false
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 1) {
-    nav.classList.remove('absolute')
-    nav.classList.add('fixed')
+  const isScrolled = window.scrollY > treshold
+
+  nav.classList.toggle('fixed', isScrolled)
+  nav.classList.toggle('absolute', !isScrolled)
+  nav.classList.toggle('bg-brand-accent', isScrolled || isMenuOpen)
+  hamburgerMenu.classList.toggle('hover:text-brand-accent', !isScrolled)
+  hamburgerMenu.classList.toggle('hover:text-gray-300', isScrolled)
+})
+
+hamburgerMenu.addEventListener('click', () => {
+  isMenuOpen = mobileMenu.classList.contains('max-h-0')
+
+  body.classList.toggle('overflow-y-hidden')
+
+  if (isMenuOpen) {
+    // Opening menu - nav background immediately, menu after delay
+    nav.classList.toggle('bg-brand-accent', window.scrollY > treshold || true)
+
+    setTimeout(() => {
+      mobileMenu.classList.remove('max-h-0')
+      mobileMenu.classList.add('max-h-136')
+    }, 150)
   } else {
-    nav.classList.add('absolute')
-    nav.classList.remove('fixed')
+    // Closing menu - menu collapses immediately, nav background after delay
+    mobileMenu.classList.add('max-h-0')
+    mobileMenu.classList.remove('max-h-136')
+
+    // Delay nav background removal (only if not scrolled)
+    if (window.scrollY < treshold) {
+      setTimeout(() => {
+        nav.classList.remove('bg-brand-accent')
+      }, 400) // Match menu animation duration
+    }
   }
+})
+
+body.addEventListener('click', (event) => {
+  if (isMenuOpen && !event.target.closest('nav')) {
+    hamburgerMenu.click()
+  }
+})
+
+mobileMenuA.forEach((element) => {
+  element.addEventListener('click', () => {
+    hamburgerMenu.click()
+  })
 })

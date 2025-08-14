@@ -2,7 +2,11 @@
 
 @theme {
     --color-brand-light: #EFF1ED;
-    --color-brand-dark: #373D20;
+    --color-brand-dark: #1f2530;
     --color-brand-medium: #717744;
-    --color-brand-accent: #8B4513;
+    --color-brand-accent: #293241;
+}
+
+html {
+    scrollbar-gutter: stable;
 }
