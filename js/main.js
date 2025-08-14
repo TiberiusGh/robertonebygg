@@ -76,51 +76,40 @@ mobileMenuA.forEach((element) => {
   })
 })
 
-// Handle multiple files
+// Handle file upload
 let fileCounter = 1
-let currentInputId = 'fil1'
-
-// Initialize first file input
-fil1.addEventListener('change', handleFileSelection)
 
 filBtn.addEventListener('click', function () {
-  // Find the next available input or create a new one
-  let currentInput = document.getElementById(currentInputId)
+  // Always create a new input for each file
+  const newInput = document.createElement('input')
+  newInput.type = 'file'
+  newInput.name = `file${fileCounter}`
+  newInput.className = 'hidden'
 
-  if (currentInput.files.length === 0) {
-    // Current input is empty, use it
-    currentInput.click()
-  } else {
-    // Current input has a file, create a new one
-    fileCounter++
-    const newInputId = `fil${fileCounter}`
+  newInput.addEventListener('change', function (e) {
+    if (e.target.files[0]) {
+      // Add to container so it gets submitted
+      fileInputContainer.appendChild(newInput)
 
-    const newInput = document.createElement('input')
-    newInput.type = 'file'
-    newInput.name = `file${fileCounter}`
-    newInput.id = newInputId
-    newInput.className = 'hidden'
-    newInput.addEventListener('change', handleFileSelection)
+      // Update display
+      updateFileDisplay()
 
-    fileInputContainer.appendChild(newInput)
-    currentInputId = newInputId
-    newInput.click()
-  }
+      // Increment counter for next file
+      fileCounter++
+    }
+  })
+
+  // Trigger file selection immediately
+  newInput.click()
 })
 
-function handleFileSelection(e) {
-  if (e.target.files[0]) {
-    updateFileDisplay()
-  }
-}
-
 function updateFileDisplay() {
-  const allCurrentInputs = document.querySelectorAll(
+  const allInputs = document.querySelectorAll(
     '#file-inputs-container input[type="file"]'
   )
   const selectedFiles = []
 
-  allCurrentInputs.forEach((input) => {
+  allInputs.forEach((input) => {
     if (input.files[0]) {
       selectedFiles.push(input.files[0])
     }
