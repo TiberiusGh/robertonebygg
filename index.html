@@ -48,11 +48,11 @@
         class="absolute text-white w-full px-[10vw] py-4 transition-all duration-200 ease-in-out z-30"
       >
         <div class="flex flex-nowrap justify-between items-center">
-          <h1
+          <h2
             class="sm:text-3xl text-2xl font-bold tracking-tight cursor-default select-none z-30 text-shadow-lg/20"
           >
             ROBERTONEBYGG
-          </h1>
+          </h2>
           <ul class="hidden xl:flex space-x-6 items-center flex-nowrap">
             <li>
               <a href="#" class="hover:text-stone-300" aria-label="Hem">Hem</a>
@@ -188,9 +188,9 @@
         <div
           class="relative -top-7/12 px-[10vw] text-white z-10 cursor-default select-none"
         >
-          <p class="text-4xl sm:text-5xl font-bold pb-10">
+          <h1 class="text-4xl sm:text-5xl font-bold pb-10">
             Din Lokala Snickare
-          </p>
+          </h1>
           <p class="text-lg pb-6">
             Renovering, snickeri och byggtjänster i Kalmar. Etablerat firma
             sedan 2015 och med över 30 är erfarenget är vi ett seriöst
@@ -346,12 +346,10 @@
       </h2>
 
       <form
-        action="#"
         name="Kontakt"
-        enctype="multipart/form-data"
         method="POST"
         data-netlify="true"
-        data-netlify-recaptcha="true"
+        enctype="multipart/form-data"
         class="text-2xl"
       >
         <input type="hidden" name="form-name" value="Kontakt" />
@@ -394,6 +392,8 @@
             class="flex-1 px-8 py-4 rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl text-center tracking-wider cursor-pointer"
           />
         </div>
+
+        <div class="py-6" data-netlify-recaptcha="true"></div>
       </form>
     </section>
 
