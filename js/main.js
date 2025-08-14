@@ -5,7 +5,10 @@ const nav = document.querySelector('nav')
 const logo = document.querySelector('nav h1')
 const body = document.body
 const mobileMenuA = document.querySelectorAll('#mobile-menu a')
-const filBtn = document.getElementById('fil')
+
+const fil1 = document.getElementById('fil1')
+const filBtn = document.getElementById('file-button')
+const fileInputContainer = document.getElementById('file-inputs-container')
 const fileList = document.getElementById('file-list')
 
 function hello() {
@@ -74,16 +77,60 @@ mobileMenuA.forEach((element) => {
 })
 
 // Handle multiple files
-filBtn.addEventListener('change', function (e) {
-  const files = e.target.files
+let fileCounter = 1
+let currentInputId = 'fil1'
 
-  if (files.length > 0) {
-    // Clear previous content
+// Initialize first file input
+fil1.addEventListener('change', handleFileSelection)
+
+filBtn.addEventListener('click', function () {
+  // Find the next available input or create a new one
+  let currentInput = document.getElementById(currentInputId)
+
+  if (currentInput.files.length === 0) {
+    // Current input is empty, use it
+    currentInput.click()
+  } else {
+    // Current input has a file, create a new one
+    fileCounter++
+    const newInputId = `fil${fileCounter}`
+
+    const newInput = document.createElement('input')
+    newInput.type = 'file'
+    newInput.name = `file${fileCounter}`
+    newInput.id = newInputId
+    newInput.className = 'hidden'
+    newInput.addEventListener('change', handleFileSelection)
+
+    fileInputContainer.appendChild(newInput)
+    currentInputId = newInputId
+    newInput.click()
+  }
+})
+
+function handleFileSelection(e) {
+  if (e.target.files[0]) {
+    updateFileDisplay()
+  }
+}
+
+function updateFileDisplay() {
+  const allCurrentInputs = document.querySelectorAll(
+    '#file-inputs-container input[type="file"]'
+  )
+  const selectedFiles = []
+
+  allCurrentInputs.forEach((input) => {
+    if (input.files[0]) {
+      selectedFiles.push(input.files[0])
+    }
+  })
+
+  if (selectedFiles.length > 0) {
     fileList.replaceChildren()
     fileList.classList.remove('hidden')
 
-    // Create file list
-    Array.from(files).forEach((file) => {
+    selectedFiles.forEach((file) => {
       const fileItem = document.createElement('div')
       fileItem.textContent = `📎 ${file.name} (${(file.size / 1024).toFixed(
         1
@@ -94,4 +141,4 @@ filBtn.addEventListener('change', function (e) {
   } else {
     fileList.classList.add('hidden')
   }
-})
+}
