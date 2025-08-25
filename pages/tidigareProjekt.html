@@ -35,6 +35,7 @@
     <script type="module" src="/js/main.js"></script>
     <script type="module" src="/js/image_slider.js"></script>
     <script type="module" src="/js/show_more_btn.js"></script>
+    <script type="module" src="/js/image_preview.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,6 +46,36 @@
   </head>
 
   <body class="touch-manipulation font-outfit min-w-[350px] cursor-default">
+    <!-- Modal overlay -->
+    <div
+      class="hidden lightbox fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
+      aria-modal="true"
+      aria-label="Project image gallery"
+    >
+      <!-- This gets centered automatically -->
+      <!-- Container for your layout -->
+      <button
+        class="closeBtn absolute top-4 right-4 xl:top-8 xl:right-8 bg-black/50 text-white py-2 px-3 rounded-md cursor-pointer hover:bg-brand-accent"
+      >
+        Close
+      </button>
+
+      <div class="flex justify-center items-center">
+        <img id="lightboxImage" src="" class="w-[90%] max-h-[95vh]" />
+      </div>
+
+      <button
+        class="lightboxPrevBtn absolute left-2 xl:left-8 top-1/2 bg-black/50 text-white py-2 px-3 rounded-md cursor-pointer hover:bg-brand-accent"
+      >
+        ◀
+      </button>
+      <button
+        class="lightboxNextBtn absolute right-2 xl:right-8 top-1/2 bg-black/50 text-white py-2 px-3 rounded-md cursor-pointer hover:bg-brand-accent"
+      >
+        ▶
+      </button>
+    </div>
+
     <header>
       <!-- Nav -->
       <nav
@@ -193,6 +224,7 @@
           </ul>
         </div>
       </nav>
+
       <section class="h-screen">
         <!-- Hero -->
         <picture>
@@ -228,71 +260,86 @@
 
       <!-- Tidigare projekt: -->
       <article
-        class="bg-stone-200 drop-shadow-lg/20 rounded-md slide-container w-full overflow-hidden rounded-t-md xl:flex"
+        class="bg-stone-200 shadow-lg shadow-black/20 rounded-md slide-container w-full overflow-hidden rounded-t-md xl:flex"
       >
         <div
           class="image-container relative xl:w-1/2 overflow-hidden xl:rounded-md xl:m-4"
         >
           <div
-            class="image-carousel h-58 flex transition-transform duration-300 ease-in-out"
+            class="image-carousel h-64 flex transition-transform duration-300 ease-in-out"
           >
             <img
-              class="object-cover rounded-t-md shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/altanhhjalp.webp"
+              class="object-cover rounded-t-md shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/001.webp"
               alt="Bild på altan"
             />
             <img
-              class="object-cover rounded-t-md flex-shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/attefallshus.webp"
-              alt="Bild på attefallshus"
-            />
-            <img
-              class="object-cover rounded-t-md shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/altanhhjalp.webp"
+              class="object-cover rounded-t-md flex-shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/002.webp"
               alt="Bild på altan"
+              loading="lazy"
             />
             <img
-              class="object-cover rounded-t-md flex-shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/attefallshus.webp"
-              alt="Bild på attefallshus"
-            />
-            <img
-              class="object-cover rounded-t-md shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/altanhhjalp.webp"
+              class="object-cover rounded-t-md shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/003.webp"
               alt="Bild på altan"
+              loading="lazy"
             />
             <img
-              class="object-cover rounded-t-md flex-shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/attefallshus.webp"
-              alt="Bild på attefallshus"
-            />
-            <img
-              class="object-cover rounded-t-md shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/altanhhjalp.webp"
+              class="object-cover rounded-t-md flex-shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/004.webp"
               alt="Bild på altan"
+              loading="lazy"
             />
             <img
-              class="object-cover rounded-t-md flex-shrink-0 min-w-full"
-              src="/images/vi_hjalper_med_bilder/attefallshus.webp"
-              alt="Bild på attefallshus"
+              class="object-cover rounded-t-md shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/005.webp"
+              alt="Bild på altan"
+              loading="lazy"
+            />
+            <img
+              class="object-cover rounded-t-md flex-shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/006.webp"
+              alt="Bild på altan"
+              loading="lazy"
+            />
+            <img
+              class="object-cover rounded-t-md shrink-0 min-w-full hover:cursor-pointer"
+              src="/images/projekter/altan/thumbnails/007.webp"
+              alt="Bild på altan"
+              loading="lazy"
             />
           </div>
 
           <button
-            class="prev-slide absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-full cursor-pointer hover:bg-brand-accent"
+            class="prev-slide-mobile xl:hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-full cursor-pointer hover:bg-brand-accent"
           >
             ◀
           </button>
           <button
-            class="next-slide absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-full cursor-pointer hover:bg-brand-accent"
+            class="next-slide-mobile xl:hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-full cursor-pointer hover:bg-brand-accent"
+          >
+            ▶
+          </button>
+
+          <button
+            class="prev-slide-desktop hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-full cursor-pointer hover:bg-brand-accent"
+          >
+            ◀
+          </button>
+          <button
+            class="next-slide-desktop hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-full cursor-pointer hover:bg-brand-accent"
           >
             ▶
           </button>
         </div>
 
-        <div class="text-container xl:w-1/2 xl:flex xl:flex-col">
+        <div
+          class="text-container xl:w-1/2 xl:flex xl:flex-col xl:m-4"
+          data-expanded="false"
+        >
           <div
-            class="project-text-content max-h-44 overflow-clip transition-all duration-500"
+            class="project-text-content max-h-52 xl:max-h-44 data-[expanded=true]:max-h-none overflow-clip transition-all duration-500"
           >
             <p class="text-2xl p-4 font-bold">Altanbyggnation med pool</p>
 
@@ -342,15 +389,15 @@
           </button>
 
           <button
-            class="toggle-btn-desktop hidden xl:block cursor-pointer px-8 py-4 my-6 mx-auto rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl tracking-widest"
+            class="toggle-btn-desktop hidden xl:block cursor-pointer px-8 py-4 mx-auto mt-4 rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl tracking-widest"
           >
             Se mer
           </button>
         </div>
       </article>
 
-      <article
-        class="bg-stone-200 drop-shadow-lg/20 rounded-md slide-container w-full overflow-hidden rounded-t-md xl:flex mt-24"
+      <!-- <article
+        class="bg-stone-200 shadow-lg shadow-black/20 rounded-md slide-container w-full overflow-hidden rounded-t-md xl:flex mt-24"
       >
         <div
           class="image-container relative xl:w-1/2 overflow-hidden xl:rounded-md xl:m-4"
@@ -478,7 +525,7 @@
             Se mer
           </button>
         </div>
-      </article>
+      </article> -->
     </section>
 
     <!-- Kontakt -->
