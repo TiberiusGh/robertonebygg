@@ -14,9 +14,15 @@ articles.forEach((article) => {
 
   allImgs.forEach((img, index) => {
     img.addEventListener('click', () => {
+      const isMobile = window.innerWidth <= 750
       currentImageArray = Array.from(allImgs).map((img) => {
-        return img.src.replace('/thumbnails/', '/full_rez/')
+        if (isMobile) {
+          return img.src.replace('/thumbnails/', '/mobile/')
+        } else {
+          return img.src.replace('/thumbnails/', '/full_rez/')
+        }
       })
+
       currentImageIndex = index
       openLightbox()
     })
