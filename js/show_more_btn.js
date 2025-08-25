@@ -1,47 +1,72 @@
 const articles = document.querySelectorAll('article')
 
 articles.forEach((article) => {
-  const toggleBtn = article.querySelector('.toggle-btn')
-  const toggleBtnDesktop = article.querySelector('.toggle-btn-desktop')
+  const toggleMoreBtn = article.querySelector('.toggle-btn')
+  const toggleMoreBtnDesktop = article.querySelector('.toggle-btn-desktop')
   const textContainer = article.querySelector('.text-container')
   const textContent = article.querySelector('.project-text-content')
   const exactHeight = textContent.scrollHeight
   const imageContainer = article.querySelector('.image-container')
   const imageCarousel = article.querySelector('.image-carousel')
 
-  toggleBtn.addEventListener('click', () => {
-    if (textContent.classList.contains('max-h-44')) {
-      textContent.classList.remove('max-h-44')
+  const prevSlideDesktopBtn = article.querySelector('.prev-slide-desktop')
+  const nextSlideDesktopBtn = article.querySelector('.next-slide-desktop')
+
+  const allImgs = article.querySelectorAll('img')
+
+  function toggleTextContent(button) {
+    const isExpanded = textContainer.dataset.expanded === 'true'
+    const newState = !isExpanded
+
+    textContainer.dataset.expanded = newState
+
+    if (newState) {
       textContent.style.maxHeight = exactHeight + 'px'
-      toggleBtn.textContent = 'Visa mindre'
+      button.textContent = 'Visa mindre'
     } else {
-      textContent.classList.add('max-h-44')
       textContent.style.maxHeight = ''
-      toggleBtn.textContent = 'Se mer'
+      button.textContent = 'Se mer'
     }
+
+    return newState
+  }
+
+  // Mobile button logic
+  toggleMoreBtn.addEventListener('click', () => {
+    toggleTextContent(toggleMoreBtn)
   })
 
   // Desktop button logic
-  toggleBtnDesktop.addEventListener('click', () => {
-    if (textContent.classList.contains('max-h-44')) {
-      textContent.classList.remove('max-h-44')
-      textContent.style.maxHeight = exactHeight + 'px'
-      toggleBtnDesktop.textContent = 'Visa mindre'
+  toggleMoreBtnDesktop.addEventListener('click', () => {
+    const isExpanded = toggleTextContent(toggleMoreBtnDesktop)
+
+    if (isExpanded) {
       article.classList.toggle('xl:flex')
       imageContainer.classList.toggle('xl:w-1/2')
       textContainer.classList.toggle('xl:w-1/2')
       imageCarousel.classList.toggle('gap-4')
+      nextSlideDesktopBtn.classList.toggle('hidden')
+      prevSlideDesktopBtn.classList.toggle('hidden')
       toggleImagesFullWidth()
     } else {
-      textContent.classList.add('max-h-44')
-      textContent.style.maxHeight = ''
-      toggleBtnDesktop.textContent = 'Se mer'
+      article.classList.toggle('xl:flex')
+      imageContainer.classList.toggle('xl:w-1/2')
+      textContainer.classList.toggle('xl:w-1/2')
+      imageCarousel.classList.toggle('gap-4')
+      nextSlideDesktopBtn.classList.toggle('hidden')
+      prevSlideDesktopBtn.classList.toggle('hidden')
+      toggleImagesLessWidth()
     }
   })
 
   function toggleImagesFullWidth() {
-    const allImgs = article.querySelectorAll('img')
+    allImgs.forEach((img) => {
+      img.classList.toggle('min-w-full')
+      img.classList.add('rounded-md')
+    })
+  }
 
+  function toggleImagesLessWidth() {
     allImgs.forEach((img) => {
       img.classList.toggle('min-w-full')
     })
