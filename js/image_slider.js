@@ -6,16 +6,24 @@ allSlideContainers.forEach((element) => {
   const prevSlideBtnMobile = element.querySelector('.prev-slide-mobile')
   const nextSlideBtnDesktop = element.querySelector('.next-slide-desktop')
   const prevSlideBtnDesktop = element.querySelector('.prev-slide-desktop')
-  const textContainer = element.querySelector('.text-container')
 
   let currentTranslate = 0
   const images = imageCarousel.querySelectorAll('img')
   const totalImgs = images.length
 
-  // Swipe variables
+  // Enhanced swipe variables
   let startX = 0
   let startY = 0
   let isDragging = false
+  let currentX = 0
+  let dragOffset = 0
+  let startTime = 0
+  let lastMoveTime = 0
+  let velocity = 0
+
+  // Add CSS transition when not dragging
+  imageCarousel.style.transition =
+    'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
 
   function getGap() {
     const gap = window.getComputedStyle(imageCarousel).gap
@@ -30,7 +38,6 @@ allSlideContainers.forEach((element) => {
   }
 
   function getImagePositions() {
-    // Calculate actual position of each image based on their real widths
     const gap = getGap()
     const positions = []
     let currentLeft = 0
@@ -50,7 +57,6 @@ allSlideContainers.forEach((element) => {
   }
 
   function findFirstHiddenOrPartialRight() {
-    // Find the first image that is partially hidden or completely hidden on the right
     const containerWidth = getContainerWidth()
     const positions = getImagePositions()
 
@@ -58,7 +64,6 @@ allSlideContainers.forEach((element) => {
       const imageLeft = pos.left - currentTranslate
       const imageRight = pos.right - currentTranslate
 
-      // If image extends beyond the right edge or is completely hidden
       if (imageRight > containerWidth) {
         return pos
       }
@@ -68,15 +73,12 @@ allSlideContainers.forEach((element) => {
   }
 
   function findFirstHiddenOrPartialLeft() {
-    // Find the first image that is partially hidden or completely hidden on the left
     const positions = getImagePositions()
 
     for (let i = positions.length - 1; i >= 0; i--) {
       const pos = positions[i]
       const imageLeft = pos.left - currentTranslate
-      const imageRight = pos.right - currentTranslate
 
-      // If image extends beyond the left edge or is completely hidden
       if (imageLeft < 0) {
         return pos
       }
@@ -86,12 +88,10 @@ allSlideContainers.forEach((element) => {
   }
 
   function canGoNext() {
-    // Can go next if there's an image hidden or partial on the right
     return findFirstHiddenOrPartialRight() !== null
   }
 
   function canGoPrev() {
-    // Can go prev if we've scrolled at all
     return currentTranslate > 0
   }
 
@@ -105,51 +105,69 @@ allSlideContainers.forEach((element) => {
     nextSlideBtnDesktop.style.display = showNext ? '' : 'none'
   }
 
+  function getBounds() {
+    const positions = getImagePositions()
+    if (positions.length === 0) return { min: 0, max: 0 }
+
+    const containerWidth = getContainerWidth()
+    const totalWidth = positions[positions.length - 1].right
+
+    return {
+      min: 0,
+      max: Math.max(0, totalWidth - containerWidth)
+    }
+  }
+
+  function clampTranslate(translate) {
+    const bounds = getBounds()
+    return Math.max(bounds.min, Math.min(bounds.max, translate))
+  }
+
+  function updateTransform(translate, enableTransition = true) {
+    if (enableTransition) {
+      imageCarousel.style.transition =
+        'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    } else {
+      imageCarousel.style.transition = 'none'
+    }
+    imageCarousel.style.transform = `translateX(-${translate}px)`
+  }
+
   function goToSlide(direction) {
     const containerWidth = getContainerWidth()
     const positions = getImagePositions()
 
     if (direction === 'next') {
       const target = findFirstHiddenOrPartialRight()
-
       if (target) {
-        // Move so this image's right edge aligns with container's right edge
-        // Unless that would create empty space on the left
         const newTranslate = target.right - containerWidth
         currentTranslate = Math.max(0, newTranslate)
       }
     } else if (direction === 'prev') {
       const target = findFirstHiddenOrPartialLeft()
-
       if (target) {
-        // Move so this image's left edge aligns with container's left edge
         currentTranslate = target.left
       } else if (currentTranslate > 0) {
-        // If no hidden image but we're scrolled, go back to start
         currentTranslate = 0
       }
     }
 
-    imageCarousel.style.transform = `translateX(-${currentTranslate}px)`
+    updateTransform(currentTranslate)
     updateButtonVisibility()
   }
 
-  // Reset carousel
   function resetCarousel() {
     currentTranslate = 0
-    imageCarousel.style.transform = 'translateX(0)'
+    updateTransform(currentTranslate)
     updateButtonVisibility()
   }
 
-  // Mobile button events
+  // Button events
   prevSlideBtnMobile.addEventListener('click', () => goToSlide('prev'))
   nextSlideBtnMobile.addEventListener('click', () => goToSlide('next'))
-
-  // Desktop button events
   prevSlideBtnDesktop.addEventListener('click', () => goToSlide('prev'))
   nextSlideBtnDesktop.addEventListener('click', () => goToSlide('next'))
 
-  // Reset carousel when expanding/collapsing
   const toggleMoreBtnDesktop = element.querySelector('.toggle-btn-desktop')
   if (toggleMoreBtnDesktop) {
     toggleMoreBtnDesktop.addEventListener('click', () => {
@@ -157,51 +175,134 @@ allSlideContainers.forEach((element) => {
     })
   }
 
-  // Handle window resize
   window.addEventListener('resize', () => {
     updateButtonVisibility()
   })
 
-  // Touch events for mobile swipe functionality
-  imageCarousel.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX
-    startY = e.touches[0].clientY
-    isDragging = true
-  })
+  // Enhanced touch events
+  imageCarousel.addEventListener(
+    'touchstart',
+    (e) => {
+      const touch = e.touches[0]
+      startX = touch.clientX
+      startY = touch.clientY
+      currentX = startX
+      dragOffset = 0
+      isDragging = false // Will be set to true in touchmove if horizontal
+      startTime = Date.now()
+      lastMoveTime = startTime
+      velocity = 0
+    },
+    { passive: false }
+  )
 
-  imageCarousel.addEventListener('touchmove', (e) => {
-    if (!isDragging) return
+  imageCarousel.addEventListener(
+    'touchmove',
+    (e) => {
+      const touch = e.touches[0]
+      const deltaX = touch.clientX - startX
+      const deltaY = touch.clientY - startY
+      const absX = Math.abs(deltaX)
+      const absY = Math.abs(deltaY)
 
-    const currentX = e.touches[0].clientX
-    const currentY = e.touches[0].clientY
-    const diffX = Math.abs(currentX - startX)
-    const diffY = Math.abs(currentY - startY)
-
-    if (diffX > diffY) {
-      e.preventDefault()
-    }
-  })
-
-  imageCarousel.addEventListener('touchend', (e) => {
-    if (!isDragging) return
-    isDragging = false
-
-    const endX = e.changedTouches[0].clientX
-    const endY = e.changedTouches[0].clientY
-    const diffX = startX - endX
-    const diffY = startY - endY
-
-    const minSwipeDistance = 50
-
-    if (
-      Math.abs(diffX) > Math.abs(diffY) &&
-      Math.abs(diffX) > minSwipeDistance
-    ) {
-      if (diffX > 0) {
-        goToSlide('next')
-      } else {
-        goToSlide('prev')
+      // Determine if this is a horizontal swipe
+      if (!isDragging && absX > 10) {
+        if (absX > absY) {
+          isDragging = true
+          e.preventDefault() // Prevent scrolling only after we're sure it's horizontal
+        }
       }
+
+      if (isDragging) {
+        e.preventDefault()
+
+        // Calculate velocity
+        const now = Date.now()
+        const timeDelta = now - lastMoveTime
+        if (timeDelta > 0) {
+          velocity = (touch.clientX - currentX) / timeDelta
+        }
+
+        currentX = touch.clientX
+        lastMoveTime = now
+
+        // Apply drag with some resistance at boundaries
+        const rawOffset = deltaX
+        const proposedTranslate = currentTranslate - rawOffset
+        const bounds = getBounds()
+
+        let finalOffset
+        if (proposedTranslate < bounds.min) {
+          // Resistance when dragging past left boundary
+          const overscroll = bounds.min - proposedTranslate
+          finalOffset = rawOffset - overscroll * 0.3
+        } else if (proposedTranslate > bounds.max) {
+          // Resistance when dragging past right boundary
+          const overscroll = proposedTranslate - bounds.max
+          finalOffset = rawOffset + overscroll * 0.3
+        } else {
+          finalOffset = rawOffset
+        }
+
+        dragOffset = finalOffset
+        const newTranslate = currentTranslate - dragOffset
+        updateTransform(newTranslate, false)
+      }
+    },
+    { passive: false }
+  )
+
+  imageCarousel.addEventListener(
+    'touchend',
+    (e) => {
+      if (!isDragging) return
+
+      isDragging = false
+      const endTime = Date.now()
+      const swipeTime = endTime - startTime
+      const swipeDistance = Math.abs(dragOffset)
+
+      // Determine if we should snap to next/prev or return to original position
+      const threshold = getContainerWidth() * 0.15 // 15% of container width
+      const velocityThreshold = 0.5 // pixels per millisecond
+
+      let shouldAdvance = false
+      let direction = dragOffset > 0 ? 'prev' : 'next'
+
+      // Check velocity for quick swipes
+      if (Math.abs(velocity) > velocityThreshold && swipeTime < 300) {
+        shouldAdvance = true
+      }
+      // Check distance for slower swipes
+      else if (swipeDistance > threshold) {
+        shouldAdvance = true
+      }
+
+      if (shouldAdvance) {
+        // Check if we can actually go in that direction
+        if (direction === 'next' && canGoNext()) {
+          goToSlide('next')
+        } else if (direction === 'prev' && canGoPrev()) {
+          goToSlide('prev')
+        } else {
+          // Can't go in that direction, snap back
+          updateTransform(currentTranslate)
+        }
+      } else {
+        // Didn't meet threshold, snap back
+        updateTransform(currentTranslate)
+      }
+
+      // Reset drag state
+      dragOffset = 0
+    },
+    { passive: true }
+  )
+
+  // Prevent context menu on long press during drag
+  imageCarousel.addEventListener('contextmenu', (e) => {
+    if (isDragging) {
+      e.preventDefault()
     }
   })
 
