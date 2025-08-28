@@ -39,6 +39,7 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/input.css" />
   </head>
 
   <body class="touch-manipulation font-outfit min-w-[350px] cursor-default">
@@ -345,6 +346,86 @@
       >
         Se tidigare projekt
       </a>
+    </section>
+
+    <!-- Omdöme -->
+    <section class="w-full px-[10vw] py-28 text-brand-accent">
+      <h2 class="text-4xl sm:text-5xl font-bold whitespace-nowrap pb-10">
+        Omdöme
+      </h2>
+      <div
+        class="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative"
+      >
+        <div
+          class="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"
+        ></div>
+        <div
+          class="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5"
+          id="row1"
+        ></div>
+        <div
+          class="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"
+        ></div>
+      </div>
+
+      <div
+        class="marquee-row w-full mx-auto max-w-5xl overflow-hidden relative"
+      >
+        <div
+          class="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent"
+        ></div>
+        <div
+          class="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10"
+          id="row2"
+        ></div>
+        <div
+          class="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent"
+        ></div>
+      </div>
+
+      <div
+        class="flex flex-col md:flex-row justify-between items-center md:gap-20"
+      >
+        <p class="text-lg mb-8 max-w-[80ch] flex-2">
+          Vi är stolta över det arbete vi utför och de relationer vi bygger med
+          våra kunder. Har du varit nöjd med vårt arbete? Dela gärna dina
+          erfarenheter. Det hjälper både oss att utvecklas och andra att känna
+          sig trygga i sitt val av byggpartner.
+        </p>
+
+        <form
+          name="Omdome"
+          method="POST"
+          data-netlify="true"
+          enctype="multipart/form-data"
+          class="text-2xl flex-1"
+        >
+          <input type="hidden" name="form-name" value="Kontakt" />
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Namn:"
+            class="border-2 rounded-md w-full py-4 px-4 mt-6"
+            required
+          />
+
+          <textarea
+            placeholder="Omdöme:"
+            name="omdome"
+            class="border-2 rounded-md w-full py-4 px-4 mt-6"
+            required
+            rows="3"
+          ></textarea>
+          <input
+            type="submit"
+            value="Skicka omdöme"
+            class="flex px-8 py-4 mt-6 rounded-md bg-brand-accent hover:bg-brand-dark hover:text-stone-300 text-white text-xl text-center tracking-wider cursor-pointer"
+          />
+
+          <div id="file-list" class="mt-2 text-sm text-gray-600 hidden"></div>
+        </form>
+      </div>
     </section>
 
     <!-- Kontakt -->
