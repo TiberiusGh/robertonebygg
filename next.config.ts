@@ -1,7 +1,9 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -12,25 +14,6 @@ const nextConfig: NextConfig = {
         hostname: 'www.kvalitetspartner.se',
       },
     ],
-  },
-  async redirects() {
-    return [
-      {
-        source: '/pages/omoss.html',
-        destination: '/om-oss',
-        permanent: true,
-      },
-      {
-        source: '/pages/tidigareProjekt.html',
-        destination: '/tidigare-projekt',
-        permanent: true,
-      },
-      {
-        source: '/index.html',
-        destination: '/',
-        permanent: true,
-      },
-    ]
   },
 }
 
