@@ -12,7 +12,7 @@ export default function StatsBar() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
-              <span className="text-3xl sm:text-4xl font-black text-brand-medium">
+              <span className="text-3xl sm:text-4xl font-black text-brand-medium whitespace-nowrap">
                 {stat.value}
               </span>
               <span className="text-sm text-white/70 tracking-wide uppercase font-medium">
