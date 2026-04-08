@@ -9,13 +9,13 @@ export default function StatsBar() {
   return (
     <div className="w-full bg-brand-accent text-white">
       <div className="max-w-screen-xl mx-auto px-[10vw] py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-4 gap-2 sm:gap-8 text-center">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
-              <span className="text-3xl sm:text-4xl font-black text-brand-medium whitespace-nowrap">
+              <span className="text-lg sm:text-3xl md:text-4xl font-black text-brand-medium whitespace-nowrap">
                 {stat.value}
               </span>
-              <span className="text-sm text-white/70 tracking-wide uppercase font-medium">
+              <span className="text-[9px] sm:text-sm text-white/70 tracking-wide uppercase font-medium leading-tight">
                 {stat.label}
               </span>
             </div>
