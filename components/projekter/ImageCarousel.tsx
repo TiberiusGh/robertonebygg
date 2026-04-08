@@ -58,10 +58,12 @@ export default function ImageCarousel({ images, alt, onImageClick }: ImageCarous
       {current > 0 && (
         <button
           onClick={() => scrollTo(current - 1)}
-          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-md cursor-pointer hover:bg-brand-accent transition-colors"
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-md cursor-pointer hover:bg-brand-accent transition-colors"
           aria-label="Föregående bild"
         >
-          ◀
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
         </button>
       )}
 
@@ -69,10 +71,12 @@ export default function ImageCarousel({ images, alt, onImageClick }: ImageCarous
       {current < images.length - 1 && (
         <button
           onClick={() => scrollTo(current + 1)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white py-2 px-3 rounded-md cursor-pointer hover:bg-brand-accent transition-colors"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-md cursor-pointer hover:bg-brand-accent transition-colors"
           aria-label="Nästa bild"
         >
-          ▶
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
         </button>
       )}
 
