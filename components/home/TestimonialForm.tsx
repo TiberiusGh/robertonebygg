@@ -16,12 +16,19 @@ export default function TestimonialForm() {
     setStatus('sending')
     const formData = new FormData(e.currentTarget)
     try {
-      const res = await fetch('/', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          subject: 'Nytt omdöme – Robertone Bygg',
+          cc: 'robertonebygg@gmail.com',
+          name: formData.get('name'),
+          message: formData.get('omdome'),
+        }),
       })
-      setStatus(res.ok ? 'success' : 'error')
+      const data = await res.json()
+      setStatus(data.success ? 'success' : 'error')
     } catch {
       setStatus('error')
     }
@@ -42,8 +49,7 @@ export default function TestimonialForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 flex-1"
     >
-      <input type="hidden" name="form-name" value="Omdome" />
-      <input type="hidden" name="bot-field" />
+      <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} />
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="review-name" className="text-lg">Namn</Label>

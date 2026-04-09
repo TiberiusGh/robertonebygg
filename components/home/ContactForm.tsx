@@ -67,12 +67,21 @@ export default function ContactForm() {
     setErrors({})
     setStatus('sending')
     try {
-      const res = await fetch('/', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          subject: 'Ny kontaktförfrågan – Robertone Bygg',
+          cc: 'robertonebygg@gmail.com',
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          message: formData.get('meddelande'),
+        }),
       })
-      setStatus(res.ok ? 'success' : 'error')
+      const data = await res.json()
+      setStatus(data.success ? 'success' : 'error')
     } catch {
       setStatus('error')
     }
@@ -132,8 +141,7 @@ export default function ContactForm() {
             noValidate
             className="bg-white rounded-xl border border-brand-accent/10 shadow-sm p-8 flex flex-col gap-5"
           >
-            <input type="hidden" name="form-name" value="Kontakt" />
-            <input type="hidden" name="bot-field" />
+            <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-1.5">
