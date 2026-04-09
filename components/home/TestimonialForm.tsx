@@ -22,7 +22,7 @@ export default function TestimonialForm() {
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
           subject: 'Nytt omdöme – Robertone Bygg',
-          cc: 'robertonebygg@gmail.com',
+          bcc: 'tiberius.gherac@gmail.com',
           name: formData.get('name'),
           message: formData.get('omdome'),
         }),

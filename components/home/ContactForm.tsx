@@ -73,7 +73,7 @@ export default function ContactForm() {
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
           subject: 'Ny kontaktförfrågan – Robertone Bygg',
-          cc: 'robertonebygg@gmail.com',
+          bcc: 'tiberius.gherac@gmail.com',
           name: formData.get('name'),
           email: formData.get('email'),
           phone: formData.get('phone'),
